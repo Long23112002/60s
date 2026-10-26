@@ -61,8 +61,15 @@ const subData = {
 
 // Cấp đầy đủ các entitlement mà các bản Locket App Store kiểm tra
 obj.subscriber.subscriptions["locket_1600_1y"] = subData;
+obj.subscriber.subscriptions["locket_gold_yearly"] = subData;
+obj.subscriber.subscriptions["locket_gold"] = subData;
+
 obj.subscriber.entitlements["Gold"] = goldData;
+obj.subscriber.entitlements["gold"] = goldData;
 obj.subscriber.entitlements["pro"] = goldData;
+obj.subscriber.entitlements["Pro"] = goldData;
 obj.subscriber.entitlements["locket_gold"] = goldData;
+obj.subscriber.entitlements["premium"] = goldData;
+obj.subscriber.entitlements["Premium"] = goldData;
 
 $done({ body: JSON.stringify(obj) });
