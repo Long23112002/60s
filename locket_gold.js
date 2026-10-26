@@ -1,12 +1,6 @@
 /**
- * Locket Gold 60s Unlocker Script
+ * Locket Gold 60s Unlocker Script (Chuẩn 100% theo Payload Reverse-Engineered)
  * GitHub: https://github.com/Long23112002/60s
- * 
- * Các tính năng mở khóa:
- * 1. Quay video trực tiếp 60 giây (kèm micro thu âm).
- * 2. Đăng video từ thư viện (Camera Roll) thời lượng đến 60 giây có âm thanh.
- * 3. Mở khóa toàn bộ các style Caption (viết dài hơn, đa dạng font chữ, màu sắc).
- * 4. Huy hiệu Locket Gold Profile vĩnh viễn.
  */
 
 let obj = {};
@@ -17,67 +11,65 @@ try {
   obj = {};
 }
 
-if (!obj.subscriber) {
-  obj.subscriber = { subscriptions: {}, entitlements: {} };
-}
-if (!obj.subscriber.subscriptions) {
-  obj.subscriber.subscriptions = {};
-}
-if (!obj.subscriber.entitlements) {
-  obj.subscriber.entitlements = {};
-}
-
-const expireDate = "2099-12-31T23:59:59Z";
-const purchaseDate = "2023-01-01T00:00:00Z";
+const nowMs = Date.now();
+const expireDate = "2099-12-18T01:04:17Z";
+const purchaseDate = "2024-07-28T01:04:17Z";
 
 const goldData = {
   grace_period_expires_date: null,
   purchase_date: purchaseDate,
-  original_purchase_date: purchaseDate,
   product_identifier: "locket_1600_1y",
-  expires_date: expireDate,
-  ownership_type: "PURCHASED",
-  store: "app_store",
-  is_sandbox: false
+  expires_date: expireDate
 };
 
 const subData = {
-  auto_resume_date: null,
-  display_name: "locket_1600_1y",
   is_sandbox: false,
   ownership_type: "PURCHASED",
   billing_issues_detected_at: null,
-  management_url: "https://apps.apple.com/account/subscriptions",
   period_type: "normal",
-  price: {
-    amount: 399000.0,
-    currency: "VND"
-  },
   expires_date: expireDate,
   grace_period_expires_date: null,
-  refunded_at: null,
   unsubscribe_detected_at: null,
-  original_purchase_date: purchaseDate,
+  original_purchase_date: "2024-07-28T01:04:18Z",
   purchase_date: purchaseDate,
-  store: "app_store",
-  store_transaction_id: "2000001108724193"
+  store: "app_store"
 };
 
-if (!obj.subscriber.original_purchase_date) {
-  obj.subscriber.original_purchase_date = purchaseDate;
+const subscriberAttributes = {
+  locket_gold_badge: {
+    value: "true",
+    updated_at_ms: nowMs
+  },
+  locket_gold_badge_small: {
+    value: "true",
+    updated_at_ms: nowMs
+  },
+  locket_gold_since: {
+    value: purchaseDate,
+    updated_at_ms: nowMs
+  }
+};
+
+if (!obj.subscriber) {
+  obj.subscriber = {};
 }
 
-// Cấp đầy đủ các subscription & entitlement mà các bản Locket App Store kiểm tra
-obj.subscriber.subscriptions["locket_1600_1y"] = subData;
-obj.subscriber.subscriptions["locket_gold_yearly"] = subData;
-obj.subscriber.subscriptions["locket_gold"] = subData;
+obj.subscriber.entitlements = {
+  Gold: goldData,
+  gold: goldData,
+  locket_gold: goldData,
+  pro: goldData,
+  Pro: goldData,
+  premium: goldData,
+  Premium: goldData
+};
 
-obj.subscriber.entitlements["Gold"] = goldData;
-obj.subscriber.entitlements["gold"] = goldData;
-obj.subscriber.entitlements["pro"] = goldData;
-obj.subscriber.entitlements["Pro"] = goldData;
-obj.subscriber.entitlements["locket_gold"] = goldData;
-obj.subscriber.entitlements["premium"] = goldData;
-obj.subscriber.entitlements["Premium"] = goldData;
+obj.subscriber.subscriptions = {
+  locket_1600_1y: subData,
+  locket_gold_yearly: subData,
+  locket_gold: subData
+};
+
+obj.subscriber.subscriber_attributes = subscriberAttributes;
 
 $done({ body: JSON.stringify(obj) });
