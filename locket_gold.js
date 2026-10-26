@@ -33,8 +33,12 @@ const purchaseDate = "2023-01-01T00:00:00Z";
 const goldData = {
   grace_period_expires_date: null,
   purchase_date: purchaseDate,
+  original_purchase_date: purchaseDate,
   product_identifier: "locket_1600_1y",
-  expires_date: expireDate
+  expires_date: expireDate,
+  ownership_type: "PURCHASED",
+  store: "app_store",
+  is_sandbox: false
 };
 
 const subData = {
@@ -59,7 +63,11 @@ const subData = {
   store_transaction_id: "2000001108724193"
 };
 
-// Cấp đầy đủ các entitlement mà các bản Locket App Store kiểm tra
+if (!obj.subscriber.original_purchase_date) {
+  obj.subscriber.original_purchase_date = purchaseDate;
+}
+
+// Cấp đầy đủ các subscription & entitlement mà các bản Locket App Store kiểm tra
 obj.subscriber.subscriptions["locket_1600_1y"] = subData;
 obj.subscriber.subscriptions["locket_gold_yearly"] = subData;
 obj.subscriber.subscriptions["locket_gold"] = subData;
