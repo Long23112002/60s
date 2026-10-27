@@ -57,17 +57,11 @@ if (!obj.subscriber) {
 obj.subscriber.entitlements = {
   Gold: goldData,
   gold: goldData,
-  locket_gold: goldData,
-  pro: goldData,
-  Pro: goldData,
-  premium: goldData,
-  Premium: goldData
+  locket_gold: goldData
 };
 
 obj.subscriber.subscriptions = {
-  locket_1600_1y: subData,
-  locket_gold_yearly: subData,
-  locket_gold: subData
+  locket_1600_1y: subData
 };
 
 obj.subscriber.subscriber_attributes = subscriberAttributes;
